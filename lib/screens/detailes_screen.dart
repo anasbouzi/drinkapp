@@ -1,5 +1,8 @@
 import 'package:drinkapp/core/utils/styless.dart';
 import 'package:drinkapp/models/drink_model.dart';
+import 'package:drinkapp/widgets/bottom_section.dart';
+import 'package:drinkapp/widgets/qty_widget.dart';
+import 'package:drinkapp/widgets/toggle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -46,18 +49,21 @@ class _DetailesScreenState extends State<DetailesScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(_drink[_currentPage.round()].name,
-                        style: Styless.textStyle18,),
+                      Text(
+                        _drink[_currentPage.round()].name,
+                        style: Styless.textStyle18,
+                      ),
                       Gap(10),
                       Text(_drink[_currentPage.round()].title),
                     ],
                   ),
-                  Text("\$ ${_drink[_currentPage.round()].price}",
-                    style: Styless.textStyle16,),
+                  Text(
+                    "\$ ${_drink[_currentPage.round()].price}",
+                    style: Styless.textStyle16,
+                  ),
                 ],
               ),
             ),
-
             //image
             PageView.builder(
               controller: _controller,
@@ -102,9 +108,30 @@ class _DetailesScreenState extends State<DetailesScreen> {
                 );
               },
             ),
+            //bottom section
+            Positioned(
+              bottom: 65,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  children: [BottomSection(), Gap(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ToggleWidget(),
+                        Gap(20),
+                        Expanded(child: QtyWidget()),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
+}
